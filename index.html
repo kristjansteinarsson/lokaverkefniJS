@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-con" href="https://png.pngtree.com/png-clipart/20230823/original/pngtree-mario-mushroom-head-game-play-picture-image_8234972.png">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.css"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js" integrity="sha512-FwNWaxyfy2XlEINoSnZh1JQ5TRRtGow0D6XcmAWmYCRgvqOUTnzCxPc9uF35u5ZEpirk1uhlPVA19tflhvnW1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <title>Mario Leikir</title>
+</head>
+<header>
+
+    <div id="search">
+        <input type="search" id="searchBar" placeholder="Leitaðu af leik" maxlength="35">
+    </div>
+
+    <div class="kostur">
+        <span id="minPrice">Min kr. 4,150</span>
+        <input type="range" min="0" max="4">
+        <span id="maxPrice">Max kr. 10,955</span>
+    </div>
+    
+    <div class="dagatal">
+        <input type="text" id="dateRangePicker" placeholder="Veldu dagsetning">
+    </div>
+
+</header>
+<body>
+
+    <div class="container">
+        <div id="gamesContainer"></div>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="gameDetailsOverlay" id="gameDetailsOverlay">
+            <button class="closeButton" id="closeButton">X</button>
+            <div id="gameImageAndText" class="gameImageAndText"></div>
+        </div>
+    </div>
+
+    <div class="background"></div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+</body>
+</html>
