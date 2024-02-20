@@ -104,6 +104,7 @@ header h1{
 
 .gameInfo{
     text-align: left;
+    width: 70%;
 }
 
 .gamePrice{
@@ -118,7 +119,7 @@ header h1{
     font-weight: bold;
     display: block;
     margin-left: auto;
-    margin-right: 0px;
+    margin-right: auto;
 }
 
 .gameLocation{
@@ -126,7 +127,7 @@ header h1{
     width: 60%;
     display: block;
     margin-left: auto;
-    margin-right: 0px;
+    margin-right: auto;
 }
 
 .container {
@@ -138,19 +139,21 @@ header h1{
 }
 
 input[type=search]{
-    padding: 2px;
+    padding: 5px;
     border-radius: 5px;
     font-size: 20px;
     text-align: center;
-    width: 100%;
+    width: 90%;
+    background-color: beige;
 }
 
 input[type=text]{
-    padding: 2px;
+    padding: 5px;
     border-radius: 5px;
     font-size: 20px;
     text-align: center;
-    width: 100%;
+    width: 90%;
+    background-color: beige;
 }
 
 .overlay {
@@ -179,13 +182,14 @@ input[type=text]{
     background-color: white;
     padding: 1%;
     border-radius: 10px;
-    width: 60%;
+    width: 50%;
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.8);
 }
 
 .gameImageAndText {
     display: flex;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 .gameImageAndText img {
@@ -200,6 +204,12 @@ input[type=text]{
 }
 
 .gameDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gameCountryDetails{
     display: flex;
     justify-content: space-between;
     align-items: center;

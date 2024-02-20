@@ -37,19 +37,19 @@ function displayGames(data) {
 
         let gamePrice = document.createElement("p");
         gamePrice.classList.add("gamePrice");
-        gamePrice.textContent = game.Price;
+        gamePrice.textContent = "Price: " + game.Price;
 
         let gameRelease = document.createElement("p");
         gameRelease.classList.add("gameRelease");
-        gameRelease.textContent = game.Release;
+        gameRelease.textContent = "Release Date: " + game.Release;
 
         let gameLocationCountry = document.createElement("p");
         gameLocationCountry.classList.add("gameLocationCountry");
-        gameLocationCountry.textContent = `${game.Location.countries}`
+        gameLocationCountry.textContent = "Released: " + `${game.Location.countries}`
 
         let gameLocation = document.createElement("p");
         gameLocation.classList.add("gameLocation");
-        gameLocation.textContent = `${game.Location.latitude}, ${game.Location.longitude}`;
+        gameLocation.textContent = "Location: " + `${game.Location.latitude}, ${game.Location.longitude}`;
 
         gameCard.appendChild(gameImage);
 
@@ -108,16 +108,28 @@ function displayGames(data) {
 
             gameDetails.appendChild(gamePrice);
             gameDetails.appendChild(gameRelease);
-            gameDetails.appendChild(gameLocationCountry);
-            gameDetails.appendChild(gameLocation);
+
+            let gameDetailsCountries = document.createElement('div');
+            gameDetailsCountries.classList.add('gameCountryDetails')
+
+            gameDetailsCountries.appendChild(gameLocationCountry);
+            gameDetailsCountries.appendChild(gameLocation);
             
             gameDetailsOverlay.appendChild(gameImageAndText);
+
+            let hr = document.createElement('hr');
+            gameDetailsOverlay.appendChild(hr);
+
             gameDetailsOverlay.appendChild(gameDetails);
+            gameDetailsOverlay.appendChild(gameDetailsCountries);
         });
 
         document.getElementById("gamesContainer").appendChild(gameCard);
     });
 }
+
+// Kort
+
 
 // Dagatal
 document.addEventListener("DOMContentLoaded", async function() {
@@ -149,7 +161,7 @@ function filterGames(data, startDate, endDate) {
 
 // Search Bar
 document.getElementById("searchBar").addEventListener("input", async function() {
-    
+
     const searchGame = this.value.toLowerCase();
 
     const gameData = await get("vidburdir.json");
