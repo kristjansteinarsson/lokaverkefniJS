@@ -19,8 +19,8 @@ function displayGames(data){
         gameTitle.classList.add("gameTitle");
         gameTitle.textContent = game.Game;
 
-        let gameTitleCard = document.createElement("h2");
-        gameTitleCard.classList.add("gameTitle");
+        let gameTitleCard = document.createElement("p");
+        gameTitleCard.classList.add("gameTitleCard");
         gameTitleCard.textContent = game.Game;
     
         let gameImage = document.createElement("img");
@@ -44,7 +44,7 @@ function displayGames(data){
         gamePrice.textContent = "Price: " + game.Price;
 
         let gamePriceCard = document.createElement("p");
-        gamePriceCard.classList.add("gamePrice");
+        gamePriceCard.classList.add("gamePriceCard");
         gamePriceCard.textContent = "Price: " + game.Price;
 
         let gameRelease = document.createElement("p");
@@ -52,7 +52,7 @@ function displayGames(data){
         gameRelease.textContent = "Release Date: " + game.Release;
 
         let gameReleaseCard = document.createElement("p");
-        gameReleaseCard.classList.add("gameRelease");
+        gameReleaseCard.classList.add("gameReleaseCard");
         gameReleaseCard.textContent = "Release Date: " + game.Release;
 
 

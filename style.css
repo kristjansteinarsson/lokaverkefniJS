@@ -72,25 +72,27 @@ i{
 
 .gameCard{
     align-items: center;
-    text-align: center;
     display: inline-block;
     border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; /* Added color transition */
     background-color: white;
     border: solid 3px black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
     margin: 13px;
     margin-top: 20px;
-    width: 450px;
-    height: 300px;
+    width: 300px;
+    height: 320px;
     font-size: 15px;
     overflow: hidden;
 }
 
 .gameCard p{
     font-size: 15px;
-    margin: 0;
-    display: inline-flex;
+    text-align: center;
+}
+
+.gameTitleCard{
+    font-weight: bold;
 }
 
 .gameTitle{
@@ -98,31 +100,24 @@ i{
     margin-right: 10px;
 }
 
-.gameImage{
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    filter: blur(1.5px);
+.gameImage {
+    width: 35%;
+    height: auto;
+    margin-top: 30px;
+    transition: transform 0.3s ease, margin-top 0.3s ease; /* Ensure transitions are smooth */
+    border-radius: 10px;
 }
 
-.gamePrice, .gameRelease, .gameLocationCountry, .gameLocation{
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin: 5px 0;
-}
-
-.gameCard:hover{
+.gameCard:hover {
     transform: scale(1.10);
     cursor: pointer;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
     filter: brightness(110%);
+    color: white;
 }
 
-.gameCard:hover .gameImage{
-    filter: blur(0px);
-    border-bottom: 2px solid black;
+.gameCard:hover .gameImage {
+    transform: scale(1.8) translateY(15%);
 }
 
 .gameInfo{
