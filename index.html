@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js" integrity="sha512-FwNWaxyfy2XlEINoSnZh1JQ5TRRtGow0D6XcmAWmYCRgvqOUTnzCxPc9uF35u5ZEpirk1uhlPVA19tflhvnW1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -21,17 +22,17 @@
 <header>
 
     <div id="search">
-        <input type="search" id="searchBar" placeholder="Leitaðu af leik" maxlength="36">
+        <input type="search" id="searchBar" placeholder="Leitaðu af leik" maxlength="36"><i class="fa fa-search"></i>
     </div>
 
     <div class="kostur">
-        <span id="minPrice">Min kr. 4,150</span>
+        <span id="minPrice">Small money</span>
         <input type="range" min="0" max="4">
-        <span id="maxPrice">Max kr. 10,955</span>
+        <span id="maxPrice">big huge money</span>
     </div>
 
     <div class="dagatal">
-        <input type="text" id="dateRangePicker" placeholder="Veldu dagsetning">
+        <i class="fa fa-calendar"></i><input type="text" id="dateRangePicker" placeholder="Veldu dagsetning">
     </div>
 
 </header>

@@ -21,7 +21,7 @@ header{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
 }
 
-header div {
+header div{
     background-color: white;
     padding: 10px;
     display: flex;
@@ -40,11 +40,15 @@ header h1{
     margin: 0;
 }
 
+i{
+    width: 10%;
+}
+
 .dagatal{
     width: 25%;
 }
 
-.kostur {
+.kostur{
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -53,7 +57,7 @@ header h1{
     font-size: 20px;
 }
 
-.background {
+.background{
     position: fixed;
     top: 0;
     left: 0;
@@ -68,43 +72,63 @@ header h1{
 
 .gameCard{
     align-items: center;
-    height: 355px;
-    display: inline-flex;
-    padding: 10px;
+    text-align: center;
+    display: inline-block;
     border-radius: 15px;
-    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+    border: solid 3px black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    margin: 13px;
+    margin-top: 20px;
+    width: 450px;
+    height: 300px;
+    font-size: 15px;
+    overflow: hidden;
+}
+
+.gameCard p{
+    font-size: 15px;
+    margin: 0;
+    display: inline-flex;
 }
 
 .gameTitle{
     font-weight: bold;
-    text-align: left;
     margin-right: 10px;
 }
 
 .gameImage{
-    width: auto; 
-    height: 90%;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding: 5%;
-    background-color: white; 
-    border: solid 3px black;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    filter: blur(1.5px);
 }
 
-.gameImage:hover{
+.gamePrice, .gameRelease, .gameLocationCountry, .gameLocation{
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 5px 0;
+}
+
+.gameCard:hover{
     transform: scale(1.10);
     cursor: pointer;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
     filter: brightness(110%);
 }
 
+.gameCard:hover .gameImage{
+    filter: blur(0px);
+    border-bottom: 2px solid black;
+}
+
 .gameInfo{
     text-align: left;
-    width: 70%;
+    width: 90%;
+    margin-right: 10px;
 }
 
 .gamePrice{
@@ -124,13 +148,16 @@ header h1{
 
 .gameLocation{
     font-weight: bold;
-    width: 60%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.container {
+.gameMap{
+    border-radius: 15px;
+    margin-right: 3%;
+    width: 90%;
+    height: 90%;
+}
+
+.container{
     display: block;
     margin-right: auto;
     margin-left: auto;
@@ -143,7 +170,7 @@ input[type=search]{
     border-radius: 5px;
     font-size: 20px;
     text-align: center;
-    width: 90%;
+    width: 80%;
     background-color: beige;
 }
 
@@ -152,11 +179,11 @@ input[type=text]{
     border-radius: 5px;
     font-size: 20px;
     text-align: center;
-    width: 90%;
+    width: 80%;
     background-color: beige;
 }
 
-.overlay {
+.overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -169,41 +196,46 @@ input[type=text]{
     align-items: center;
 }
 
-.overlay header {
+.overlay header{
     backdrop-filter: blur(5px);
     pointer-events: none;
 }
 
-.overlay header * {
+.overlay header *{
     pointer-events: none;
 }
 
-.gameDetailsOverlay {
+.gameDetailsOverlay{
     background-color: white;
     padding: 1%;
     border-radius: 10px;
-    width: 50%;
+    width: 75%;
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.8);
+    margin-top: 80px;
 }
 
-.gameImageAndText {
+.gameImageAndText{
     display: flex;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.gameImageAndText img {
+.gameImageAndText img{
     width: 200px;
     height: auto;
     margin-right: 20px;
 }
 
-.gameImageAndText p {
+.gameImageAndText p{
     margin: 0;
     line-height: 1.5;
 }
 
-.gameDetails {
+.gameImageCard{
+    border-radius: 10px;
+}
+
+.gameDetails{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -215,7 +247,7 @@ input[type=text]{
     align-items: center;
 }
 
-.gamePrice, .gameRelease, .gameLocationCountry, .gameLocation {
+.gamePrice, .gameRelease, .gameLocationCountry, .gameLocation{
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -227,14 +259,13 @@ input[type=text]{
     margin-top: 10px;
 }
 
-.closeButton {
+.closeButton{
     background-color: red;
     color: white;
     font-weight: bold;
     padding: 1%;
     border-radius: 5px;
     display: block;
-    margin-right: 10px;
     margin-left: auto;
     border: none;
     transition: 19ms;

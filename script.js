@@ -1,23 +1,27 @@
 // Tengja JSON
-async function get(jsons) {
-    try {
+async function get(jsons){
+    try{
         let con = await fetch(jsons);
         return await con.json();
-    } catch (error) {
+    } catch (error){
         console.log("Error:", error);
     }
 }
 
 // Setja upp allt frá JSON
+function displayGames(data){
+    data.forEach(game =>{
 
-function displayGames(data) {
-    data.forEach(game => {
         let gameCard = document.createElement("div");
         gameCard.classList.add("gameCard");
 
         let gameTitle = document.createElement("h2");
         gameTitle.classList.add("gameTitle");
         gameTitle.textContent = game.Game;
+
+        let gameTitleCard = document.createElement("h2");
+        gameTitleCard.classList.add("gameTitle");
+        gameTitleCard.textContent = game.Game;
     
         let gameImage = document.createElement("img");
         gameImage.classList.add("gameImage");
@@ -39,22 +43,66 @@ function displayGames(data) {
         gamePrice.classList.add("gamePrice");
         gamePrice.textContent = "Price: " + game.Price;
 
+        let gamePriceCard = document.createElement("p");
+        gamePriceCard.classList.add("gamePrice");
+        gamePriceCard.textContent = "Price: " + game.Price;
+
         let gameRelease = document.createElement("p");
         gameRelease.classList.add("gameRelease");
         gameRelease.textContent = "Release Date: " + game.Release;
 
+        let gameReleaseCard = document.createElement("p");
+        gameReleaseCard.classList.add("gameRelease");
+        gameReleaseCard.textContent = "Release Date: " + game.Release;
+
+
         let gameLocationCountry = document.createElement("p");
         gameLocationCountry.classList.add("gameLocationCountry");
-        gameLocationCountry.textContent = "Released: " + `${game.Location.countries}`
+
+        let releasedText = document.createTextNode("Released:");
+        gameLocationCountry.appendChild(releasedText);
+
+        let lineBreakCountry = document.createElement("br");
+        gameLocationCountry.appendChild(lineBreakCountry);
+
+        let countriesText;
+        if (Array.isArray(game.Location.countries)){
+            countriesText = document.createTextNode(game.Location.countries.join(", "));
+        } else{
+            countriesText = document.createTextNode(game.Location.countries);
+        }
+
+        gameLocationCountry.appendChild(countriesText);
 
         let gameLocation = document.createElement("p");
         gameLocation.classList.add("gameLocation");
-        gameLocation.textContent = "Location: " + `${game.Location.latitude}, ${game.Location.longitude}`;
+
+        let locationText = document.createTextNode("Location:");
+        gameLocation.appendChild(locationText);
+
+        let lineBreak = document.createElement("br");
+        gameLocation.appendChild(lineBreak);
+
+        let coordinatesText = document.createTextNode(`${game.Location.latitude}, ${game.Location.longitude}`);
+        gameLocation.appendChild(coordinatesText);
 
         gameCard.appendChild(gameImage);
+        gameCard.appendChild(gameTitleCard);
+        gameCard.appendChild(gamePriceCard);
+        gameCard.appendChild(gameReleaseCard);
+        
 
-        gameImage.addEventListener('click', () => {
+        // gameImageCardText.appendChild(gameTitle);
+        // gameImageCardText.appendChild(gamePrice);
+        // gameImageCardText.appendChild(gameRelease);
+        
+        // gameCard.appendChild(gameImageCardText);
+
+        gameCard.addEventListener('click', (event) =>{
+            event.stopPropagation();
             console.log("Clicked on", game.Game);
+
+            disableHeader();
             
             document.getElementById('overlay').style.display = 'flex';
             
@@ -64,30 +112,30 @@ function displayGames(data) {
             let closeButton = document.createElement('button');
             closeButton.textContent = 'X';
             closeButton.classList.add('closeButton');
-            closeButton.addEventListener('click', () => {
+            closeButton.addEventListener('click', () =>{
                 document.getElementById('overlay').style.display = 'none';
-                enableHeaderPointerEvents();
+                enableHeader();
             });
-
-            disableHeaderPointerEvents();
             
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
+            document.addEventListener('keydown', (event) =>{
+                if (event.key === 'Escape'){
                     document.getElementById('overlay').style.display = 'none';
-                    enableHeaderPointerEvents();
+                    enableHeader();
                 }
             });           
         
             gameDetailsOverlay.appendChild(closeButton);
 
-            function disableHeaderPointerEvents() {
+            function disableHeader(){
                 document.querySelector('header').style.pointerEvents = 'none';
-                document.querySelector('header').style.filter = 'blur(10px)';
+                document.querySelector('header').style.filter = 'blur(5px)';
+                document.body.style.overflow = 'hidden';
             }
             
-            function enableHeaderPointerEvents() {
+            function enableHeader(){
                 document.querySelector('header').style.pointerEvents = 'auto';
                 document.querySelector('header').style.filter = 'blur(0px)';
+                document.body.style.overflow = 'auto';
             }
             
             let gameImageAndText = document.createElement('div');
@@ -103,6 +151,13 @@ function displayGames(data) {
 
             gameImageAndText.appendChild(gameTitleInfo);
 
+            let mapContainer = document.createElement('div');
+            mapContainer.setAttribute('id', 'map');
+            mapContainer.classList.add("gameMap");
+            mapContainer.style.height = '250px';
+            
+            gameImageAndText.appendChild(mapContainer);
+
             let gameDetails = document.createElement('div');
             gameDetails.classList.add('gameDetails');
 
@@ -113,15 +168,28 @@ function displayGames(data) {
             gameDetailsCountries.classList.add('gameCountryDetails')
 
             gameDetailsCountries.appendChild(gameLocationCountry);
-            gameDetailsCountries.appendChild(gameLocation);
+            // gameDetailsCountries.appendChild(gameLocation);
             
             gameDetailsOverlay.appendChild(gameImageAndText);
-
+            
             let hr = document.createElement('hr');
             gameDetailsOverlay.appendChild(hr);
 
             gameDetailsOverlay.appendChild(gameDetails);
             gameDetailsOverlay.appendChild(gameDetailsCountries);
+
+            
+
+            var map = L.map('map').setView([parseFloat(game.Location.longitude), parseFloat(game.Location.latitude)], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add a marker to the map
+            var marker = L.marker([game.Location.latitude, game.Location.longitude]).addTo(map);
+            marker.bindPopup("Nintendo Co., Ltd.").openPopup();
         });
 
         document.getElementById("gamesContainer").appendChild(gameCard);
@@ -132,13 +200,13 @@ function displayGames(data) {
 
 
 // Dagatal
-document.addEventListener("DOMContentLoaded", async function() {
+document.addEventListener("DOMContentLoaded", async function(){
     const gameData = await get("vidburdir.json");
 
-    flatpickr("#dateRangePicker", {
+    flatpickr("#dateRangePicker",{
         mode: "range",
         dateFormat: "d-m-Y",
-        onClose: function(selectedDates) {
+        onClose: function(selectedDates){
             const startDate = selectedDates[0];
             const endDate = selectedDates[1];
             filterGames(gameData, startDate, endDate);
@@ -148,8 +216,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     displayGames(gameData);
 });
 
-function filterGames(data, startDate, endDate) {
-    const filteredData = data.filter(game => {
+function filterGames(data, startDate, endDate){
+    const filteredData = data.filter(game =>{
         const releaseDate = new Date(game.Release.split('/').reverse().join('-'));
         return !startDate || !endDate || (releaseDate >= startDate && releaseDate <= endDate);
     });
@@ -160,7 +228,7 @@ function filterGames(data, startDate, endDate) {
 // Price Slider
 
 // Search Bar
-document.getElementById("searchBar").addEventListener("input", async function() {
+document.getElementById("searchBar").addEventListener("input", async function(){
 
     const searchGame = this.value.toLowerCase();
 
@@ -168,8 +236,8 @@ document.getElementById("searchBar").addEventListener("input", async function() 
     filterGamesBySearch(gameData, searchGame);
 });
 
-function filterGamesBySearch(data, searchGame) {
-    const filteredData = data.filter(game => {
+function filterGamesBySearch(data, searchGame){
+    const filteredData = data.filter(game =>{
         console.log("Checking:", game.Game.toLowerCase(), "for", searchGame);
         return game.Game.toLowerCase().includes(searchGame);
     });
