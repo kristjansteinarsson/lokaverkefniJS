@@ -59,7 +59,7 @@ function displayGames(data){
         let gameLocationCountry = document.createElement("p");
         gameLocationCountry.classList.add("gameLocationCountry");
 
-        let releasedText = document.createTextNode("Released:");
+        let releasedText = document.createTextNode("Released in:");
         gameLocationCountry.appendChild(releasedText);
 
         let lineBreakCountry = document.createElement("br");
@@ -91,13 +91,6 @@ function displayGames(data){
         gameCard.appendChild(gamePriceCard);
         gameCard.appendChild(gameReleaseCard);
         
-
-        // gameImageCardText.appendChild(gameTitle);
-        // gameImageCardText.appendChild(gamePrice);
-        // gameImageCardText.appendChild(gameRelease);
-        
-        // gameCard.appendChild(gameImageCardText);
-
         gameCard.addEventListener('click', (event) =>{
             event.stopPropagation();
             console.log("Clicked on", game.Game);
@@ -168,7 +161,6 @@ function displayGames(data){
             gameDetailsCountries.classList.add('gameCountryDetails')
 
             gameDetailsCountries.appendChild(gameLocationCountry);
-            // gameDetailsCountries.appendChild(gameLocation);
             
             gameDetailsOverlay.appendChild(gameImageAndText);
             
@@ -178,8 +170,7 @@ function displayGames(data){
             gameDetailsOverlay.appendChild(gameDetails);
             gameDetailsOverlay.appendChild(gameDetailsCountries);
 
-            
-
+            // Kort
             var map = L.map('map').setView([parseFloat(game.Location.longitude), parseFloat(game.Location.latitude)], 13);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -187,7 +178,7 @@ function displayGames(data){
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
 
-            // Add a marker to the map
+            // Sýnir staðsetning
             var marker = L.marker([game.Location.latitude, game.Location.longitude]).addTo(map);
             marker.bindPopup("Nintendo Co., Ltd.").openPopup();
         });
@@ -195,9 +186,6 @@ function displayGames(data){
         document.getElementById("gamesContainer").appendChild(gameCard);
     });
 }
-
-// Kort
-
 
 // Dagatal
 document.addEventListener("DOMContentLoaded", async function(){
@@ -226,6 +214,20 @@ function filterGames(data, startDate, endDate){
 }
 
 // Price Slider
+document.getElementById('priceRange').addEventListener('input', function() {
+    let index = parseInt(this.value);
+    let prices = [4150, 6900, 9995, 10495, 10955];
+    let selectedPrice = prices[index];
+    document.getElementById('maxPriceValue').textContent = selectedPrice;
+    filterGamesByPrice(selectedPrice);
+});
+
+async function filterGamesByPrice(price) {
+    const gameData = await get("vidburdir.json"); // Ensure this async call is handled correctly
+    const filteredData = gameData.filter(game => parseInt(game.Price.replace(/[^0-9.-]+/g, "")) <= price);
+    document.getElementById("gamesContainer").innerHTML = "";
+    displayGames(filteredData);
+}
 
 // Search Bar
 document.getElementById("searchBar").addEventListener("input", async function(){
