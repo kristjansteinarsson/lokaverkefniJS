@@ -22,7 +22,7 @@ header{
 }
 
 header div{
-    background-color: white;
+    background-color: cyan;
     padding: 10px;
     display: flex;
     justify-content: center; 
